@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/quran_screen.dart';
+
 class HomeScreen extends StatefulWidget {
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -37,6 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
+        body: QuranScreen(),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: currentScreenIndex,
           type: BottomNavigationBarType.fixed,

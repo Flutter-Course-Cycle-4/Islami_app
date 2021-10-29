@@ -1,9 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:islami_app/models/quran_data.dart';
 
-class SoraDetails extends StatelessWidget {
+class SoraDetails extends StatefulWidget {
+  static const routeName = 'sora_details';
+
+  @override
+  State<SoraDetails> createState() => _SoraDetailsState();
+}
+
+class _SoraDetailsState extends State<SoraDetails> {
+  late int index;
+
+  String? sora;
+
+  void loadSora(int index) async {
+    print('here');
+    sora = await QuranData.readSora(index);
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
+    index = ModalRoute.of(context)!.settings.arguments as int;
+    if (sora == null) {
+      loadSora(index);
+    }
     return Container(
       decoration: BoxDecoration(
           image: DecorationImage(
@@ -15,6 +37,9 @@ class SoraDetails extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
+          iconTheme: IconThemeData(
+            color: Colors.black,
+          ),
           systemOverlayStyle: SystemUiOverlayStyle(
             statusBarIconBrightness: Brightness.light,
           ),
@@ -50,12 +75,29 @@ class SoraDetails extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                'فاتحة',
+                QuranData.quranNames[index],
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
               ),
               Divider(
                 color: Color.fromRGBO(183, 147, 95, 1),
                 thickness: 1,
+              ),
+              //Text(),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: (sora == null)
+                      ? Center(
+                          child: CircularProgressIndicator.adaptive(),
+                        )
+                      : Text(
+                          sora!,
+                          textDirection: TextDirection.rtl,
+                          style: TextStyle(
+                            fontSize: 20,
+                            height: 2,
+                          ),
+                        ),
+                ),
               ),
             ],
           ),

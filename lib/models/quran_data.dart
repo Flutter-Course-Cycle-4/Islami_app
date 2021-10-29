@@ -1,4 +1,23 @@
+import 'package:arabic_numbers/arabic_numbers.dart';
+import 'package:flutter/services.dart';
+
 class QuranData {
+  static Future<String> readSora(int index) async {
+    List<String> ayat =
+        (await rootBundle.loadString('assets/quran_content/${index + 1}.txt'))
+            .trim()
+            .split('\n');
+    String sora = '';
+    for (int i = 0; i < ayat.length; i++) {
+      if (i == 0) {
+        sora = ayat[i].trim() + ' {${ArabicNumbers().convert(i + 1)}} ';
+      } else {
+        sora = sora + ayat[i].trim() + ' {${ArabicNumbers().convert(i + 1)}} ';
+      }
+    }
+    return sora;
+  }
+
   static const List quranNames = [
     "الفاتحه",
     "البقرة",

@@ -18,7 +18,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: SoraDetails(),
+      home: HomeScreen(),
+      routes: {SoraDetails.routeName: (context) => SoraDetails()},
     );
   }
 }

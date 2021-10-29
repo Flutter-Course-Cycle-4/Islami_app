@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:islami_app/screens/hadeth_details.dart';
 
 import 'screens/home_screen.dart';
 import 'screens/sora_details.dart';
@@ -19,7 +20,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: HomeScreen(),
-      routes: {SoraDetails.routeName: (context) => SoraDetails()},
+      routes: {
+        SoraDetails.routeName: (context) => SoraDetails(),
+        HadethDetails.routeName: (context) => HadethDetails()
+      },
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:islami_app/widgets/hadeth_screen.dart';
+import 'package:islami_app/widgets/hadeth_screen_widgets/hadeth_screen.dart';
 import 'package:islami_app/widgets/radio_screen.dart';
 import 'package:islami_app/widgets/tasbeeh_screen.dart';
 

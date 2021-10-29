@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:islami_app/widgets/table_header.dart';
+import 'package:islami_app/models/quran_data.dart';
+import 'package:islami_app/screens/sora_details.dart';
+import 'package:islami_app/widgets/quran_screen_widgets/table_header.dart';
 
 import 'sora_list_item.dart';
 
@@ -25,10 +27,19 @@ class QuranScreen extends StatelessWidget {
                   TableHeader(),
                   Expanded(
                     child: ListView.builder(
-                      itemCount: quranNames.length,
+                      itemCount: QuranData.quranNames.length,
                       itemBuilder: (context, index) {
-                        return SoraListItem(
-                            ayatNumbers[index], quranNames[index]);
+                        return InkWell(
+                          onTap: () {
+                            Navigator.of(context).pushNamed(
+                                SoraDetails.routeName,
+                                arguments: index);
+                          },
+                          child: SoraListItem(
+                            QuranData.ayatNumbers[index],
+                            QuranData.quranNames[index],
+                          ),
+                        );
                       },
                     ),
                   )

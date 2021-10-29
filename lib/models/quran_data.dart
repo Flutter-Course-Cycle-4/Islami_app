@@ -1,10 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:islami_app/widgets/table_header.dart';
-
-import 'sora_list_item.dart';
-
-class QuranScreen extends StatelessWidget {
-  final List quranNames = [
+class QuranData {
+  static const List quranNames = [
     "الفاتحه",
     "البقرة",
     "آل عمران",
@@ -120,39 +115,121 @@ class QuranScreen extends StatelessWidget {
     "الفلق",
     "الناس"
   ];
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          Expanded(
-            child: Center(
-              child: Image.asset(
-                'assets/images/quran_logo.png',
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 3,
-            child: Container(
-              margin: EdgeInsets.only(top: 10),
-              child: Column(
-                children: [
-                  TableHeader(),
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: quranNames.length,
-                      itemBuilder: (context, index) {
-                        return SoraListItem('٣٨٦', quranNames[index]);
-                      },
-                    ),
-                  )
-                ],
-              ),
-            ),
-          )
-        ],
-      ),
-    );
-  }
+
+  static const List ayatNumbers = [
+    '۷',
+    '۲۸٦',
+    '۲۰۰',
+    '۱۷٦',
+    '۱۲۰',
+    '۱٦٥',
+    '۲۰٦',
+    '۷٥',
+    '۱۲۹',
+    '۱۰۹',
+    '۱۲۳',
+    '۱۱۱',
+    '٤۳',
+    '٥۲',
+    '۹۹',
+    '۱۲۸',
+    '۱۱۱',
+    '۱۱۰',
+    '۹۸',
+    '۱۳٥',
+    '۱۱۲',
+    '۷۸',
+    '۱۱۸',
+    '٦٤',
+    '۷۷',
+    '۲۲۷',
+    '۹۳',
+    '۸۸',
+    '٦۹',
+    '٦۰',
+    '۳٤',
+    '۳۰',
+    '۷۳',
+    '٥٤',
+    '٤٥',
+    '۸۳',
+    '۱۸۲',
+    '۸۸',
+    '۷٥',
+    '۸٥',
+    '٥٤',
+    '٥۳',
+    '۸۹',
+    '٥۹',
+    '۳۷',
+    '۳٥',
+    '۳۸',
+    '۲۹',
+    '۱۸',
+    '٤٥',
+    '٦۰',
+    '٤۹',
+    '٦۲',
+    '٥٥',
+    '۷۸',
+    '۹٦',
+    '۲۹',
+    '۲۲',
+    '۲٤',
+    '۱۳',
+    '۱٤',
+    '۱۱',
+    '۱۱',
+    '۱۸',
+    '۱۲',
+    '۱۲',
+    '۳۰',
+    '٥۲',
+    '٥۲',
+    '٤٤',
+    '۲۸',
+    '۲۸',
+    '۲۰',
+    '٥٦',
+    '٤۰',
+    '۳۱',
+    '٥۰',
+    '٤۰',
+    '٤٦',
+    '٤۲',
+    '۲۹',
+    '۱۹',
+    '۳٦',
+    '۲٥',
+    '۲۲',
+    '۱۷',
+    '۱۹',
+    '۲٦',
+    '۳۰',
+    '۲۰',
+    '۱٥',
+    '۲۱',
+    '۱۱',
+    '۸',
+    '۸',
+    '۱۹',
+    '٥',
+    '۸',
+    '۸',
+    '۱۱',
+    '۱۱',
+    '۸',
+    '۳',
+    '۹',
+    '٥',
+    '٤',
+    '۷',
+    '۳',
+    '٦',
+    '۳',
+    '٥',
+    '٤',
+    '٥',
+    '٦',
+  ];
 }

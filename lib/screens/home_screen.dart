@@ -1,7 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:islami_app/widgets/hadeth_screen.dart';
+import 'package:islami_app/widgets/radio_screen.dart';
+import 'package:islami_app/widgets/tasbeeh_screen.dart';
 
-import '../widgets/quran_screen.dart';
+import '../widgets/quran_screen_widgets/quran_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -10,6 +14,12 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late int currentScreenIndex;
+  List screens = [
+    RadioScreen(),
+    TasbeehScreen(),
+    HadethScreen(),
+    QuranScreen(),
+  ];
   @override
   void initState() {
     super.initState();
@@ -28,6 +38,9 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
+          systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarIconBrightness: Brightness.light,
+          ),
           backgroundColor: Colors.transparent,
           elevation: 0,
           title: Text(
@@ -39,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
-        body: QuranScreen(),
+        body: screens[currentScreenIndex],
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: currentScreenIndex,
           type: BottomNavigationBarType.fixed,

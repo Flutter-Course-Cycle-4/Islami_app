@@ -2,16 +2,21 @@ import 'package:arabic_numbers/arabic_numbers.dart';
 import 'package:flutter/services.dart';
 
 class HadethData {
-  static Future<List<String>> getTitles() async {
+  static Future<List<Map>> getAhadeth() async {
     List<String> ahadeth;
     ahadeth = (await rootBundle.loadString('assets/ahadeth/ahadeth.txt'))
         .trim()
         .split('#');
-    List<String> titles = [];
+    List<Map> ahadethMap = [];
     for (int i = 0; i < ahadeth.length; i++) {
-      if (ahadeth[i].length > 0)
-        titles.add('الحديث رقم ${ArabicNumbers().convert(i + 1)}');
+      if (ahadeth[i].length > 0) {
+        String text = (ahadeth[i].split('\n')..removeAt(0)).join(' ');
+        ahadethMap.add({
+          'title': 'الحديث رقم ${ArabicNumbers().convert(i + 1)}',
+          'text': text,
+        });
+      }
     }
-    return titles;
+    return ahadethMap;
   }
 }

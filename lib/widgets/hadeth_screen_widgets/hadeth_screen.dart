@@ -10,16 +10,16 @@ class HadethScreen extends StatefulWidget {
 }
 
 class _HadethScreenState extends State<HadethScreen> {
-  List<String>? titles;
+  List<Map>? ahadeth;
 
   void loadTitles() async {
-    titles = await HadethData.getTitles();
+    ahadeth = await HadethData.getAhadeth();
     setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    if (titles == null) {
+    if (ahadeth == null) {
       loadTitles();
     }
     return Column(
@@ -39,20 +39,24 @@ class _HadethScreenState extends State<HadethScreen> {
               children: [
                 HadethHeader(),
                 Expanded(
-                  child: (titles == null)
+                  child: (ahadeth == null)
                       ? CircularProgressIndicator.adaptive()
                       : ListView.builder(
-                          itemCount: titles!.length,
+                          itemCount: ahadeth!.length,
                           itemBuilder: (context, index) {
                             return InkWell(
                               onTap: () {
-                                Navigator.of(context)
-                                    .pushNamed(HadethDetails.routeName);
+                                Navigator.of(context).pushNamed(
+                                    HadethDetails.routeName,
+                                    arguments: {
+                                      'title': ahadeth![index]['title'],
+                                      'text': ahadeth![index]['text'],
+                                    });
                               },
                               child: Container(
                                 margin: EdgeInsets.symmetric(vertical: 10),
                                 child: Text(
-                                  titles![index],
+                                  ahadeth![index]['title'],
                                   textAlign: TextAlign.center,
                                   style: TextStyle(fontSize: 25),
                                 ),

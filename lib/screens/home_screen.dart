@@ -8,6 +8,10 @@ import 'package:islami_app/widgets/tasbeeh_screen.dart';
 import '../widgets/quran_screen_widgets/quran_screen.dart';
 
 class HomeScreen extends StatefulWidget {
+  Function toggleTheme;
+
+  HomeScreen(this.toggleTheme);
+
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -23,43 +27,53 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    currentScreenIndex = 0;
+    currentScreenIndex = 3;
   }
 
   @override
   Widget build(BuildContext context) {
+    bool isLight = Theme.of(context).brightness == Brightness.light;
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
           fit: BoxFit.fill,
-          image: AssetImage('assets/images/bg3.png'),
+          image: AssetImage('assets/images/${isLight ? 'bg3' : 'bg_dark'}.png'),
         ),
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
           systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarIconBrightness: Brightness.light,
+            statusBarIconBrightness: Theme.of(context).colorScheme.brightness,
           ),
           backgroundColor: Colors.transparent,
           elevation: 0,
           title: Text(
             'إسلامي',
             style: TextStyle(
-              color: Colors.black,
+              color: Theme.of(context).colorScheme.secondaryVariant,
               fontWeight: FontWeight.bold,
               fontSize: 30,
             ),
           ),
+          actions: [
+            Switch.adaptive(
+              value: isLight,
+              activeColor: Theme.of(context).primaryColor,
+              onChanged: (value) {
+                widget.toggleTheme();
+              },
+            ),
+          ],
         ),
         body: screens[currentScreenIndex],
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: currentScreenIndex,
           type: BottomNavigationBarType.fixed,
-          backgroundColor: Color.fromRGBO(183, 147, 95, 1),
+          backgroundColor: Theme.of(context).primaryColor,
           showUnselectedLabels: false,
           unselectedItemColor: Colors.white,
-          selectedItemColor: Colors.black,
+          selectedItemColor: Theme.of(context).colorScheme.secondary,
           iconSize: 36,
           selectedLabelStyle: TextStyle(
             fontSize: 16,

@@ -22,6 +22,7 @@ class _SoraDetailsState extends State<SoraDetails> {
 
   @override
   Widget build(BuildContext context) {
+    bool isLight = Theme.of(context).brightness == Brightness.light;
     index = ModalRoute.of(context)!.settings.arguments as int;
     if (sora == null) {
       loadSora(index);
@@ -31,24 +32,24 @@ class _SoraDetailsState extends State<SoraDetails> {
           image: DecorationImage(
         fit: BoxFit.fill,
         image: AssetImage(
-          'assets/images/bg3.png',
+          'assets/images/${isLight ? 'bg3' : 'bg_dark'}.png',
         ),
       )),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
           iconTheme: IconThemeData(
-            color: Colors.black,
+            color: Theme.of(context).colorScheme.secondaryVariant,
           ),
           systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarIconBrightness: Brightness.light,
+            statusBarIconBrightness: Theme.of(context).colorScheme.brightness,
           ),
           elevation: 0,
           backgroundColor: Colors.transparent,
           title: Text(
             'إسلامي',
             style: TextStyle(
-              color: Colors.black,
+              color: Theme.of(context).colorScheme.secondaryVariant,
               fontWeight: FontWeight.bold,
               fontSize: 30,
             ),
@@ -66,8 +67,8 @@ class _SoraDetailsState extends State<SoraDetails> {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                Colors.white.withOpacity(0.7),
-                Colors.white,
+                Theme.of(context).colorScheme.primaryVariant.withOpacity(0.7),
+                Theme.of(context).colorScheme.primaryVariant,
               ],
             ),
             borderRadius: BorderRadius.circular(20),
@@ -76,7 +77,10 @@ class _SoraDetailsState extends State<SoraDetails> {
             children: [
               Text(
                 QuranData.quranNames[index],
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                style: TextStyle(
+                    color: Theme.of(context).colorScheme.secondary,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 30),
               ),
               Divider(
                 color: Color.fromRGBO(183, 147, 95, 1),
@@ -93,6 +97,7 @@ class _SoraDetailsState extends State<SoraDetails> {
                           sora!,
                           textDirection: TextDirection.rtl,
                           style: TextStyle(
+                            color: Theme.of(context).colorScheme.secondary,
                             fontSize: 20,
                             height: 2,
                           ),

@@ -10,7 +10,7 @@ class HadethData {
     List<Map> ahadethMap = [];
     for (int i = 0; i < ahadeth.length; i++) {
       if (ahadeth[i].length > 0) {
-        String text = (ahadeth[i].split('\n')..removeAt(0)).join(' ');
+        String text = (ahadeth[i].trim().split('\n')..removeAt(0)).join(' ');
         ahadethMap.add({
           'title': 'الحديث رقم ${ArabicNumbers().convert(i + 1)}',
           'text': text,
